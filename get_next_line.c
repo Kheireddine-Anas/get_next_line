@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 08:32:49 by akheired          #+#    #+#             */
-/*   Updated: 2024/01/29 18:48:24 by akheired         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:55:59 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
-int	ft_strlen(char *str)
+int	ft_strlen(unsigned char *str)
 {
 	int	i;
 	
@@ -29,7 +29,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_putstr(char *str)
+void	ft_putstr(unsigned char *str)
 {
 	while (*str)
 	{
@@ -115,13 +115,13 @@ char	*first_line(char *str)
 	return (dst);
 }
 
-char    *ft_strchr(char *str)
+unsigned char    *ft_strchr(unsigned char *str)
 {
 	int i = 0;
 	int j = 0;
 	while(str && str[i] && str[i] != '\n')
 		i++;
-	char *nw_line = malloc(ft_strlen(str +i) + 1);
+	unsigned char *nw_line = malloc(ft_strlen(str +i) + 1);
 	if (!nw_line)
 		return (NULL);
 	if(str[i] == '\n')
@@ -138,7 +138,7 @@ char    *ft_strchr(char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*holder;
+	static unsigned char	*holder;
 	char		buffer[BUFFUR_SIZE +1];
 	int			fd_num;
 	char		*line;
@@ -165,6 +165,7 @@ int main()
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
+
 	// printf("ssssss\n");
 	// while (1);
 	// printf("%s", ft_strchr(get_next_line(fd)));
