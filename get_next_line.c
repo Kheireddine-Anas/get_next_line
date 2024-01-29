@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 08:32:49 by akheired          #+#    #+#             */
-/*   Updated: 2024/01/29 16:03:00 by akheired         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:48:24 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,15 @@ char	*first_line(char *str)
 	while(str && str[i] && str[i] != '\n')
 		i++;
 	dst = malloc(i + 1);
+	i = 0;
 	while (str[i])
 	{
-		dst[j] = str[i];
-		j++;
+		dst[i] = str[i];
 		if(str[i] == '\n')
+		{
+			i++;
 			break;
+		}
 		i++;
 	}
 	dst[i] = 0;
@@ -119,10 +122,15 @@ char    *ft_strchr(char *str)
 	while(str && str[i] && str[i] != '\n')
 		i++;
 	char *nw_line = malloc(ft_strlen(str +i) + 1);
-	i++;
+	if (!nw_line)
+		return (NULL);
+	if(str[i] == '\n')
+		i++;
 	while(str && str[i] && str[i] != '\n')
 	{
-		nw_line[j] = str[i++];
+		nw_line[j] = str[i];
+		j++;
+		i++;
 	}
 	nw_line[j] = 0;
 	return (nw_line);
@@ -142,12 +150,12 @@ char	*get_next_line(int fd)
 			return (NULL);
 		buffer[fd_num] = '\0';
 		holder = ft_strjoin(holder, buffer);
-		if (find_new_line(buffer) == 1)
+		if (find_new_line(buffer) == 1 || fd_num < BUFFUR_SIZE)
 			break;
 	}
-	line = last_line(holder);
+	line = first_line(holder);
 	holder = ft_strchr(holder);
-	printf("%s", line);
+	// printf("%s", line);
 	return (line);
 }
  
@@ -155,8 +163,9 @@ int main()
 {
 	int fd = open("txt", O_RDONLY);
 	printf("%s", get_next_line(fd));
-	// printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
 	// printf("ssssss\n");
-	while (1);
+	// while (1);
 	// printf("%s", ft_strchr(get_next_line(fd)));
 }
