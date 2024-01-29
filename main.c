@@ -16,6 +16,7 @@ void stc()
     free(tgf);
     printf("%s-\n", tgf);
     printf("%s\n", text);
+    
 }
 
 

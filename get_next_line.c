@@ -6,15 +6,27 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 08:32:49 by akheired          #+#    #+#             */
-/*   Updated: 2024/01/26 16:54:01 by akheired         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:03:00 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+#include <fcntl.h>
+#include <stdio.h>
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
+}
+int	ft_strlen(char *str)
+{
+	int	i;
+	
+	i = 0;
+	
+	while (str && str[i])
+		i++;
+	return (i);
 }
 
 void	ft_putstr(char *str)
@@ -25,9 +37,28 @@ void	ft_putstr(char *str)
 		str++;
 	}
 }
+char	*ft_strdup(char *str)
+{
+	int		i;
+	char	*dst;
+
+	i = 0;
+	dst = malloc(ft_strlen(str) +1);
+	if (!dst)
+		return (NULL);
+	while(str[i])
+	{	
+		dst[i] = str[i];
+		i++;
+	}
+	dst[i] = 0;
+	return (dst);
+}
 
 int	find_new_line(char *str)
 {
+	if(!str)
+		return 0;
 	while (*str)
 	{
 		if (*str == '\n')
@@ -37,153 +68,95 @@ int	find_new_line(char *str)
 	return (0);
 }
 
-int	ft_strlen(char *str)
-{
-	int	i;
-	
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
-}
-
-char	*behind_line(char *str)
-{
-	int		i;
-	char	*new_line;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-		{
-			i++;
-			while (str[i])
-			{
-				*new_line++ = str[i];
-			}
-		}
-		if (!str[i])
-			break;
-		i++;
-	}
-	return (new_line);
-}
-
-
-char *ft_strdup(const char *str)
-{
-    if (str == NULL)
-        return NULL;
-
-    // Calculate the length of the input string
-    size_t len = 0;
-    while (str[len] != '\0') {
-        len++;
-    }
-
-    // Allocate memory for the duplicate string (+1 for the null terminator)
-    char *dup_str = (char *)malloc((len + 1) * sizeof(char));
-    if (dup_str == NULL) {
-        // Memory allocation failed
-        return NULL;
-    }
-
-    // Copy the characters from the original string to the duplicate
-    for (size_t i = 0; i <= len; i++) {
-        dup_str[i] = str[i];
-    }
-
-    return dup_str;
-}
-
-char *behind_line(char *str)
-{
-    int i = 0;
-    char *new_line = NULL;
-
-    while (str[i])
-    {
-        if (str[i] == '\n')
-        {
-            i++;
-            new_line = ft_strdup(&str[i]);
-            break;
-        }
-        i++;
-    }
-    return new_line;
-}
-
-
-
-
 char	*ft_strjoin(char *holder, char *buffer)
 {
 	char	*new_str;
 	int		i;
 	int		j = 0;
-	char	tmp[12];
 
 	i = 0;
 	new_str = malloc(ft_strlen(holder) + ft_strlen(buffer) + 1);
 	if (!new_str)
 		return ( NULL);
-	while (holder && *holder)
+	while (holder && holder[i])
 	{
-		new_str[i++] = *holder++;
+		new_str[i] = holder[i];
+		i++;
 	}
 	while (buffer && *buffer)
-	{
-		// ft_putchar('d');
-		if (*buffer == '\n')
-		{
-			new_str[i++] = *buffer++;
-			break;
-		}
 		new_str[i++] = *buffer++;
-	}
-	new_str[i] = 0;
+	new_str[i] = '\0';
+	free(holder);
 	return (new_str);
 }
+char	*first_line(char *str)
+{
+	char	*dst;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while(str && str[i] && str[i] != '\n')
+		i++;
+	dst = malloc(i + 1);
+	while (str[i])
+	{
+		dst[j] = str[i];
+		j++;
+		if(str[i] == '\n')
+			break;
+		i++;
+	}
+	dst[i] = 0;
+	return (dst);
+}
+
+char    *ft_strchr(char *str)
+{
+	int i = 0;
+	int j = 0;
+	while(str && str[i] && str[i] != '\n')
+		i++;
+	char *nw_line = malloc(ft_strlen(str +i) + 1);
+	i++;
+	while(str && str[i] && str[i] != '\n')
+	{
+		nw_line[j] = str[i++];
+	}
+	nw_line[j] = 0;
+	return (nw_line);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*holder;
-	char		*buffer;
+	char		buffer[BUFFUR_SIZE +1];
 	int			fd_num;
-	char		*tmp;
+	char		*line;
 
-	buffer = malloc(BUFFUR_SIZE + 1);
-	buffer[BUFFUR_SIZE] = '\0';
 	while (1)
 	{
-		// printf("| %p |\n", holder);
 		fd_num = read(fd, buffer, BUFFUR_SIZE);
-		if (fd_num == -1 || BUFFUR_SIZE < 0 || fd_num == 0)
-			return (0);
+		if (fd_num <= 0 || BUFFUR_SIZE <= 0)
+			return (NULL);
+		buffer[fd_num] = '\0';
+		holder = ft_strjoin(holder, buffer);
 		if (find_new_line(buffer) == 1)
-		{
-			holder = ft_strjoin(holder, buffer);
-			tmp = holder;
-			holder = behind_line(holder);
-			free(buffer);
-			free(holder);
-			break ;
-		}
-		else
-			holder = ft_strjoin(holder, buffer);
-		free(holder);
+			break;
 	}
-	return (tmp);
+	line = last_line(holder);
+	holder = ft_strchr(holder);
+	printf("%s", line);
+	return (line);
 }
-#include <fcntl.h>
-#include <stdio.h>
-
+ 
 int main()
 {
 	int fd = open("txt", O_RDONLY);
 	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
 	// printf("%s", get_next_line(fd));
+	// printf("ssssss\n");
 	while (1);
+	// printf("%s", ft_strchr(get_next_line(fd)));
 }

@@ -43,6 +43,8 @@ char	*ft_strdup(const char *str)
     return dup_str;
 }
 
+
+
 char	*ft_strjoin(char *holder, char *buffer)
 {
 	char	*new_str;
@@ -112,11 +114,14 @@ int main()
     int fd = open("txt", O_RDONLY);
     char *line;
 
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("%s\n", line);
-        free(line);  // Don't forget to free the line after using it
-    }
+    get_next_line(fd);
+    get_next_line(fd);
+    get_next_line(fd);
+    // while ((line = get_next_line(fd)) != NULL)
+    // {
+    //     printf("%s\n", line);
+    //     free(line);  // Don't forget to free the line after using it
+    // }
 
     close(fd);
 	while(1);
