@@ -75,13 +75,13 @@ char	*ft_strjoin(char *holder, char *buffer)
 char *get_next_line(int fd)
 {
     static char *holder = NULL;
-    char buffer[BUFFUR_SIZE + 1];
+    char buffer[BUFFER_SIZE + 1];
     char *tmp = NULL;
 
     while (1)
     {
-        ssize_t fd_num = read(fd, buffer, BUFFUR_SIZE);
-        if (fd_num == -1 || BUFFUR_SIZE < 0 || fd_num == 0)
+        ssize_t fd_num = read(fd, buffer, BUFFER_SIZE);
+        if (fd_num == -1 || BUFFER_SIZE < 0 || fd_num == 0)
         {
             free(holder);
             return NULL;

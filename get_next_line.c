@@ -6,59 +6,30 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 08:32:49 by akheired          #+#    #+#             */
-/*   Updated: 2024/01/29 18:55:59 by akheired         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:28:04 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#include <fcntl.h>
+# include <fcntl.h>
 #include <stdio.h>
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-int	ft_strlen(unsigned char *str)
+
+int	ft_strlen(char *str)
 {
 	int	i;
 	
 	i = 0;
-	
 	while (str && str[i])
 		i++;
 	return (i);
 }
 
-void	ft_putstr(unsigned char *str)
-{
-	while (*str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
-char	*ft_strdup(char *str)
-{
-	int		i;
-	char	*dst;
-
-	i = 0;
-	dst = malloc(ft_strlen(str) +1);
-	if (!dst)
-		return (NULL);
-	while(str[i])
-	{	
-		dst[i] = str[i];
-		i++;
-	}
-	dst[i] = 0;
-	return (dst);
-}
 
 int	find_new_line(char *str)
 {
 	if(!str)
-		return 0;
+		return (0);
 	while (*str)
 	{
 		if (*str == '\n')
@@ -72,7 +43,6 @@ char	*ft_strjoin(char *holder, char *buffer)
 {
 	char	*new_str;
 	int		i;
-	int		j = 0;
 
 	i = 0;
 	new_str = malloc(ft_strlen(holder) + ft_strlen(buffer) + 1);
@@ -93,10 +63,8 @@ char	*first_line(char *str)
 {
 	char	*dst;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	while(str && str[i] && str[i] != '\n')
 		i++;
 	dst = malloc(i + 1);
@@ -115,47 +83,47 @@ char	*first_line(char *str)
 	return (dst);
 }
 
-unsigned char    *ft_strchr(unsigned char *str)
+char	*ft_strchr(char *str)
 {
-	int i = 0;
-	int j = 0;
+	char *nw_line;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
 	while(str && str[i] && str[i] != '\n')
 		i++;
-	unsigned char *nw_line = malloc(ft_strlen(str +i) + 1);
+	nw_line = malloc(ft_strlen(str +i) + 1);
+	// printf("#%p#", nw_line);
 	if (!nw_line)
 		return (NULL);
 	if(str[i] == '\n')
 		i++;
 	while(str && str[i] && str[i] != '\n')
-	{
-		nw_line[j] = str[i];
-		j++;
-		i++;
-	}
+		nw_line[j++] = str[i++];
 	nw_line[j] = 0;
 	return (nw_line);
 }
 
 char	*get_next_line(int fd)
 {
-	static unsigned char	*holder;
-	char		buffer[BUFFUR_SIZE +1];
-	int			fd_num;
+	static char	*holder;
+	char		buffer[BUFFER_SIZE +1];
+	long		fd_num;
 	char		*line;
 
 	while (1)
 	{
-		fd_num = read(fd, buffer, BUFFUR_SIZE);
-		if (fd_num <= 0 || BUFFUR_SIZE <= 0)
+		fd_num = read(fd, buffer, BUFFER_SIZE);
+		if (fd_num <= 0 || BUFFER_SIZE <= 0)
 			return (NULL);
 		buffer[fd_num] = '\0';
 		holder = ft_strjoin(holder, buffer);
-		if (find_new_line(buffer) == 1 || fd_num < BUFFUR_SIZE)
+		if (find_new_line(buffer) == 1 || fd_num < BUFFER_SIZE)
 			break;
 	}
 	line = first_line(holder);
 	holder = ft_strchr(holder);
-	// printf("%s", line);
 	return (line);
 }
  
@@ -163,10 +131,11 @@ int main()
 {
 	int fd = open("txt", O_RDONLY);
 	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+	// printf("%s", get_next_line(fd));
+	// printf("%s", get_next_line(fd));
 
+	printf("bbb = |%d|\n", BUFFER_SIZE);
 	// printf("ssssss\n");
-	// while (1);
+	while (1);
 	// printf("%s", ft_strchr(get_next_line(fd)));
 }
