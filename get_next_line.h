@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:02:14 by akheired          #+#    #+#             */
-/*   Updated: 2024/01/31 18:43:40 by akheired         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:03:14 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000132
+#  define BUFFER_SIZE 10
 # endif
 # include <unistd.h>
 # include <stdlib.h>

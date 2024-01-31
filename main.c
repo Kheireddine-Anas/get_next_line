@@ -23,11 +23,11 @@ int main()
 	// free(get_next_line(fd));
 	// close(fd);
     int fd1 = open("txt", O_RDONLY);
-	char *ln = get_next_line(fd1);
+	// char *ln = get_next_line(fd1);
 	printf("%s",  get_next_line(fd1));
 	// printf("%s",  get_next_line(fd1));
 	// printf("%s",  get_next_line(fd1));
-	free(ln);
+	// free(ln);
 	close(fd1);
 
     // int fd = open("txt", O_RDONLY);
