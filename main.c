@@ -1,26 +1,29 @@
+
+#include "get_next_line.h"
 #include <stdio.h>
-#include <fcntl.h>   // for open
-#include <unistd.h>  // for close
-#include <stdlib.h>
-#include <string.h>
-
-void stc()
-{
-    static char *tgf;
-    char *text;
-    tgf = malloc(7);
-
-    text  = "laster";
-    tgf = text;
-    text = "dsds";
-    free(tgf);
-    printf("%s-\n", tgf);
-    printf("%s\n", text);
-    
-}
-
 
 int main()
 {
-    stc();
-}
+    int fd = open("txt", O_RDONLY);
+    // char *line1 = get_next_line(fd);
+//     printf("%s", line1);
+
+
+//     char *line2 = get_next_line(fd);
+//     printf("%s", line2);
+	
+//     char *line3 = get_next_line(fd);
+//     printf("%s", line3);
+	
+//     char *line4 = get_next_line(fd);
+//     printf("%s", line4);
+//     char *line5 = get_next_line(fd);
+//     printf("%s", line5);
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	// while (1);
+ }

@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:04:38 by akheired          #+#    #+#             */
-/*   Updated: 2024/01/30 15:54:47 by akheired         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:44:09 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_strjoin(char *holder, char *buffer)
 	i = 0;
 	new_str = malloc(ft_strlen(holder) + ft_strlen(buffer) + 1);
 	if (!new_str)
-		return (NULL);
+		return (free(new_str), free(holder), NULL);
 	while (holder && holder[i])
 	{
 		new_str[i] = holder[i];
@@ -65,6 +65,8 @@ char	*first_line(char *str)
 	while (str && str[i] && str[i] != '\n')
 		i++;
 	dst = malloc(i + 1);
+	if (!dst)
+		return (free(dst), NULL);
 	i = 0;
 	while (str[i])
 	{
@@ -90,12 +92,15 @@ char	*last_line(char *str)
 	j = 0;
 	while (str && str[i] && str[i] != '\n')
 		i++;
-	nw_line = malloc(ft_strlen(str + i) + 1);
-	if (!nw_line)
-		return (NULL);
 	if (str[i] == '\n')
 		i++;
-	while (str && str[i] && str[i] != '\n')
+	nw_line = malloc(ft_strlen(str) - i + 1);
+	if (!nw_line)
+		return (free(nw_line), NULL);
+	// if (str[i] == '\n')
+		// i++;
+	int size = ft_strlen(str) - i;
+	while (j < size)
 		nw_line[j++] = str[i++];
 	nw_line[j] = 0;
 	if (str)

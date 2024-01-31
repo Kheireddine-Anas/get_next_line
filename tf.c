@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 08:32:49 by akheired          #+#    #+#             */
-/*   Updated: 2024/01/30 16:24:12 by akheired         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:50:29 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ char	*first_line(char *str)
 	int		i;
 
 	i = 0;
+	if (!str || str[i])
+		return (NULL);
 	while(str && str[i] && str[i] != '\n')
 		i++;
 	dst = malloc(i + 1);
@@ -109,47 +111,42 @@ char	*get_next_line(int fd)
 {
 	static char	*holder;
 	char		*buffer;
-	long		readed;
+	int			readed;
 	char		*line;
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	while (1)
+	readed = 1;
+	while (readed >= 0)
 	{
 		readed = read(fd, buffer, BUFFER_SIZE);
-		if (readed < 0 || BUFFER_SIZE <= 0)
+		if (readed < 0)
 			return (NULL);
-		buffer[readed] = '\0';
 		holder = ft_strjoin(holder, buffer);
-		// printf("===> %s\n", holder);
-		if (find_new_line(buffer) == 1 || readed < BUFFER_SIZE)
-			break;
+		if (find_new_line(buffer) == 1)
+			break ;
+		line = first_line(holder);
+		holder = ft_strchr(holder);
 	}
+		return (line);
 	
-	// printf(" holder ===> %s\n", holder);
-	if (buffer)
-		free(buffer);
-	line = first_line(holder);
-	holder = ft_strchr(holder);
-	// printf("#%s#", holder);
-	return (line);
 }
 int main()
 {
 	int fd = open("txt", O_RDONLY);
 	char *line1 = get_next_line(fd);
-	printf("%s", line1);
-	free(line1);
+	// printf("%s", line1);
+	// // free(line1);
 
-	char *line2 = get_next_line(fd);
-	printf("%s", line2);
-	free(line2);
-	char *line5 = get_next_line(fd);
-	printf("%s", line5);
-	free(line2);
-	printf("\n");
-	close(fd);
-	// sleep(1000);
-	// while(1);
+	// char *line2 = get_next_line(fd);
+	// printf("%s", line2);
+	// // free(line2);
+	// char *line5 = get_next_line(fd);
+	// printf("%s", line5);
+	// // free(line2);
+	// // printf("\n");
+	// close(fd);
+	// // sleep(1000);
+	// // while(1);
 }
