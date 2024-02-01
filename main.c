@@ -37,7 +37,7 @@ int main()
 	// printf("%s", ln);
 	// free(ln1);
 	// close(fd);
-
+	// while(1);
 	printf("\n");
 	// while (1);
  }

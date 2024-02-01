@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 08:32:49 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/01 17:31:12 by akheired         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:21:08 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (free(holder), NULL);
+		return ( NULL);
 	while (1)
 	{
 		readed = read(fd, buffer, BUFFER_SIZE);

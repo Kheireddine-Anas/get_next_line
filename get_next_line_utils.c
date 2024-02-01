@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:04:38 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/01 13:57:53 by akheired         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:26:00 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char	*ft_strjoin(char *holder, char *buffer)
 
 	i = 0;
 	if (!holder && !buffer)
-		return (free(holder), NULL);
+		return ( NULL);
 	new_str = malloc(ft_strlen(holder) + ft_strlen(buffer) + 1);
 	if (!new_str)
-		return (free(holder), NULL);
+		return (NULL);
 	while (holder && holder[i])
 	{
 		new_str[i] = holder[i];
