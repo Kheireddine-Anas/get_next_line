@@ -24,8 +24,9 @@ int main()
 	// close(fd);
     int fd1 = open("txt", O_RDONLY);
 	// char *ln = get_next_line(fd1);
+	// printf("%s",  ln);
 	printf("%s",  get_next_line(fd1));
-	// printf("%s",  get_next_line(fd1));
+	printf("%s",  get_next_line(fd1));
 	// printf("%s",  get_next_line(fd1));
 	// free(ln);
 	close(fd1);

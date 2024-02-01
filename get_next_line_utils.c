@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:04:38 by akheired          #+#    #+#             */
-/*   Updated: 2024/01/31 16:44:09 by akheired         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:57:53 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ char	*ft_strjoin(char *holder, char *buffer)
 	int		i;
 
 	i = 0;
+	if (!holder && !buffer)
+		return (free(holder), NULL);
 	new_str = malloc(ft_strlen(holder) + ft_strlen(buffer) + 1);
 	if (!new_str)
-		return (free(new_str), free(holder), NULL);
+		return (free(holder), NULL);
 	while (holder && holder[i])
 	{
 		new_str[i] = holder[i];
@@ -62,11 +64,15 @@ char	*first_line(char *str)
 	int		i;
 
 	i = 0;
-	while (str && str[i] && str[i] != '\n')
+	if (!str || str[i] == '\0')
+		return (NULL);
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\n')
 		i++;
 	dst = malloc(i + 1);
 	if (!dst)
-		return (free(dst), NULL);
+		return (NULL);
 	i = 0;
 	while (str[i])
 	{
@@ -78,7 +84,7 @@ char	*first_line(char *str)
 		}
 		i++;
 	}
-	dst[i] = 0;
+	dst[i] = '\0';
 	return (dst);
 }
 
@@ -90,15 +96,15 @@ char	*last_line(char *str)
 
 	i = 0;
 	j = 0;
-	while (str && str[i] && str[i] != '\n')
+	if (!str)
+		return (NULL);
+	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
 		i++;
-	nw_line = malloc(ft_strlen(str) - i + 1);
+	nw_line = malloc((ft_strlen(str) - i) + 1);
 	if (!nw_line)
-		return (free(nw_line), NULL);
-	// if (str[i] == '\n')
-		// i++;
+		return (NULL);
 	int size = ft_strlen(str) - i;
 	while (j < size)
 		nw_line[j++] = str[i++];
