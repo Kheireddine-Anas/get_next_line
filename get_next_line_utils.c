@@ -39,10 +39,12 @@ char	*ft_strjoin(char *holder, char *buffer)
 {
 	char	*new_str;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	if (!holder && !buffer)
-		return ( NULL);
+		return (NULL);
 	new_str = malloc(ft_strlen(holder) + ft_strlen(buffer) + 1);
 	if (!new_str)
 		return (NULL);
@@ -51,10 +53,12 @@ char	*ft_strjoin(char *holder, char *buffer)
 		new_str[i] = holder[i];
 		i++;
 	}
-	while (buffer && *buffer)
-		new_str[i++] = *buffer++;
+	while (buffer && buffer[j] && j < BUFFER_SIZE)
+    	new_str[i++] = buffer[j++];
+		// new_str[i++] = *buffer++;
 	new_str[i] = '\0';
-	free(holder);
+	if (holder)
+		free(holder);
 	return (new_str);
 }
 

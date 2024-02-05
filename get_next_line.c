@@ -15,9 +15,9 @@
 char	*get_next_line(int fd)
 {
 	static char	*holder;
-	char		*buffer;
-	ssize_t		readed;
-	char		*line;
+	char				*buffer;
+	ssize_t			readed;
+	char				*line;
 	
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -32,7 +32,7 @@ char	*get_next_line(int fd)
 		buffer[readed] = '\0';
 		holder = ft_strjoin(holder, buffer);
 		if((!holder || *holder == '\0') && readed < BUFFER_SIZE)
-			return (free(buffer), free(holder), NULL);
+			return (free(buffer), NULL);
 		if (find_new_line(buffer) == 1 || readed < BUFFER_SIZE)
 			break ;
 	}
