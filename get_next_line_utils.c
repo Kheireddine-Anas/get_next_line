@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:04:38 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/01 21:26:00 by akheired         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:38:48 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_strjoin(char *holder, char *buffer)
 		new_str[i] = holder[i];
 		i++;
 	}
-	while (buffer && buffer[j] && j < BUFFER_SIZE)
+	while (buffer && buffer[j])
     	new_str[i++] = buffer[j++];
 		// new_str[i++] = *buffer++;
 	new_str[i] = '\0';

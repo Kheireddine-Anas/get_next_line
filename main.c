@@ -37,6 +37,9 @@ int main()
 	
 	printf("%s",  get_next_line(fd1));
 	printf("%s",  get_next_line(fd1));
+	printf("%s",  get_next_line(fd1));
+	printf("%s",  get_next_line(fd1));
+	printf("%s",  get_next_line(fd1));
 	// printf("%s",  get_next_line(fd1));
 	// printf("%s",  get_next_line(fd1));
 	// free(ln);
