@@ -22,7 +22,7 @@ int main()
 	// printf("%s", get_next_line(fd));
 	// free(get_next_line(fd));
 	// close(fd);
-    int fd1 = open("empty.txt", O_RDONLY);
+    int fd1 = open("empty", O_RDONLY);
 	// char ln[4];
 	// static char *holder1;
 	// int rd = read(fd1, ln, 3);
@@ -34,12 +34,15 @@ int main()
 	// {
 	// 	printf("%d", ft_strlen(holder1));
 	// }
-	
-	printf("%s",  get_next_line(fd1));
-	printf("%s",  get_next_line(fd1));
-	printf("%s",  get_next_line(fd1));
-	printf("%s",  get_next_line(fd1));
-	printf("%s",  get_next_line(fd1));
+	// get_next_line(fd1);
+	char *cdf = get_next_line(fd1);
+	printf("%s",  cdf);
+	free(cdf);
+	// printf("%s",  get_next_line(fd1));
+	// printf("%s",  get_next_line(fd1));
+	// printf("%s",  get_next_line(fd1));
+	// printf("%s",  get_next_line(fd1));
+	while(1);
 	// printf("%s",  get_next_line(fd1));
 	// printf("%s",  get_next_line(fd1));
 	// free(ln);

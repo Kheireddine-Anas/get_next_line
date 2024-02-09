@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:04:38 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/08 11:38:48 by akheired         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:10:34 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_strjoin(char *holder, char *buffer)
     	new_str[i++] = buffer[j++];
 		// new_str[i++] = *buffer++;
 	new_str[i] = '\0';
-	if (holder)
+	if(holder)
 		free(holder);
 	return (new_str);
 }
@@ -113,7 +113,6 @@ char	*last_line(char *str)
 	while (j < size)
 		nw_line[j++] = str[i++];
 	nw_line[j] = 0;
-	if (str)
-		free(str);
+	free(str);
 	return (nw_line);
 }
