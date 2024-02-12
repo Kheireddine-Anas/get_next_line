@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 19:11:30 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/11 11:37:37 by akheired         ###   ########.fr       */
+/*   Created: 2024/01/22 19:02:14 by akheired          #+#    #+#             */
+/*   Updated: 2024/01/31 20:03:14 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
+#  define BUFFER_SIZE 10
 # endif
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 char	*get_next_line(int fd);
-char	*read_str(int fd, char *lft_str);
-size_t	ft_strlen(char *s);
+int		ft_strlen(char *str);
 int		find_new_line(char *str);
-char	*ft_strjoin(char *left_str, char *buff);
-char	*ft_first_line(char *left_str);
-char	*ft_last_line(char *left_str);
+char	*ft_strjoin(char *holder, char *buffer);
+char	*first_line(char *str);
+char	*last_line(char *str);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 19:00:14 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/11 11:37:52 by akheired         ###   ########.fr       */
+/*   Created: 2024/02/12 10:04:58 by akheired          #+#    #+#             */
+/*   Updated: 2024/02/12 15:46:58 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ char	*read_str(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*holder;
+	static char	*holder[1024 + 1];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	holder = read_str(fd, holder);
-	if (!holder)
+	holder[fd] = read_str(fd, holder[fd]);
+	if (!holder[fd])
 		return (NULL);
-	line = ft_first_line(holder);
-	holder = ft_last_line(holder);
+	line = ft_first_line(holder[fd]);
+	holder[fd] = ft_last_line(holder[fd]);
 	return (line);
 }

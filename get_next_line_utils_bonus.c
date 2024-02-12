@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 19:04:38 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/11 11:35:34 by akheired         ###   ########.fr       */
+/*   Created: 2024/02/12 10:04:38 by akheired          #+#    #+#             */
+/*   Updated: 2024/02/12 15:50:05 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "get_next_line.h"
 
@@ -106,7 +105,7 @@ char	*ft_last_line(char *last_str)
 		free(last_str);
 		return (NULL);
 	}
-	new_str = malloc((ft_strlen(last_str) - i)+ 1);
+	new_str = malloc((ft_strlen(last_str) - i) + 1);
 	if (!new_str)
 		return (NULL);
 	i++;
