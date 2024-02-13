@@ -6,11 +6,11 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:04:58 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/12 15:46:58 by akheired         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:27:46 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_str(int fd, char *str)
 {
@@ -36,10 +36,10 @@ char	*read_str(int fd, char *str)
 	free(buff);
 	return (str);
 }
-
+#include <limits.h>
 char	*get_next_line(int fd)
 {
-	static char	*holder[1024 + 1];
+	static char	*holder[OPEN_MAX + 1];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
