@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:04:38 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/12 15:48:29 by akheired         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:59:19 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,14 @@ char	*ft_first_line(char *first_str)
 		return (NULL);
 	while (first_str[i] && first_str[i] != '\n')
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
+	if (first_str[i] == '\n')
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (NULL);
-	i = 0;
-	while (first_str[i] && first_str[i] != '\n')
-	{
+	i = -1;
+	while (first_str[++i] && first_str[i] != '\n')
 		str[i] = first_str[i];
-		i++;
-	}
 	if (first_str[i] == '\n')
 	{
 		str[i] = first_str[i];
@@ -105,10 +104,11 @@ char	*ft_last_line(char *last_str)
 		free(last_str);
 		return (NULL);
 	}
+	if (last_str[i] == '\n')
+		i++;
 	new_str = malloc((ft_strlen(last_str) - i) + 1);
 	if (!new_str)
 		return (NULL);
-	i++;
 	while (last_str[i])
 		new_str[j++] = last_str[i++];
 	new_str[j] = '\0';

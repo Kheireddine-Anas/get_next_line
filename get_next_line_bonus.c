@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:04:58 by akheired          #+#    #+#             */
-/*   Updated: 2024/02/13 13:27:46 by akheired         ###   ########.fr       */
+/*   Updated: 2024/02/14 22:10:25 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*read_str(int fd, char *str)
 	free(buff);
 	return (str);
 }
-#include <limits.h>
+
 char	*get_next_line(int fd)
 {
 	static char	*holder[OPEN_MAX + 1];
